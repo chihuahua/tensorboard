@@ -53,6 +53,7 @@ py_library(
         "//tensorboard:expect_tensorflow_installed",
         "//tensorboard/plugins/audio:audio_plugin",
         "//tensorboard/plugins/core:core_plugin",
+        "//tensorboard/plugins/custom_scalar:custom_scalars_plugin",
         "//tensorboard/plugins/debugger:debugger_plugin_loader",
         "//tensorboard/plugins/distribution:distributions_plugin",
         "//tensorboard/plugins/graph:graphs_plugin",

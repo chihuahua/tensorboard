@@ -41,6 +41,7 @@ limitations under the License.
         default-x-range="[[defaultXRange]]"
         default-y-range="[[defaultYRange]]"
         fill-area="[[fillArea]]"
+        symbol-function="[[symbolFunction]]"
       ></vz-line-chart>
       <template is="dom-if" if="[[_loading]]">
         <div id="loading-spinner-container">
@@ -132,6 +133,8 @@ limitations under the License.
 
         defaultXRange: Array,
         defaultYRange: Array,
+
+        symbolFunction: Object,
 
         /**
          * A function that takes as inputs:
@@ -246,6 +249,7 @@ limitations under the License.
           return;
         }
 
+        // Set the visible series to the runs if dataSeries is empty.
         this.$$('vz-line-chart').setVisibleSeries(
             dataSeries || runsUpdateRecord.base);
         this._loadData();
