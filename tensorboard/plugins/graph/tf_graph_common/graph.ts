@@ -316,7 +316,7 @@ export interface Metanode extends GroupNode {
 
   // The name of the function this metanode is associated with if any.
   associatedFunction: string;
-  
+
   getFirstChild(): GroupNode|OpNode;
   getRootOp(): OpNode;
   /** Return name of all leaves inside a metanode. */
@@ -390,7 +390,7 @@ export class OpNodeImpl implements OpNode {
   // This field is only defined if the op node represents an input_arg to a
   // library function. It is the index of the input_arg.
   functionInputIndex: number;
-  
+
   // This field is only defined if the op node represents an output_arg of a
   // library function. It is the index of the output_arg.
   functionOutputIndex: number;
@@ -963,14 +963,11 @@ function normalizeInputs(inputs: string[]): NormalizedInput[] {
       }
     }
 
-    if (normalizedInputs.length === 0 ||
-      name !== normalizedInputs[normalizedInputs.length - 1].name) {
-      normalizedInputs.push({
-        name: name,
-        outputTensorKey: outputTensorKey,
-        isControlDependency: isControlDependency,
-      });
-    }
+    normalizedInputs.push({
+      name: name,
+      outputTensorKey: outputTensorKey,
+      isControlDependency: isControlDependency,
+    });
   });
   return normalizedInputs;
 }

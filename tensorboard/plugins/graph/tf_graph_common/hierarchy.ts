@@ -31,7 +31,7 @@ export interface Edges {
  */
 export interface LibraryFunctionData {
   // The metanode representing this function in the library scene group.
-  node: Metanode; 
+  node: Metanode;
 
   // A list of nodes that represent calls to this library function.
   usages: Node[];
@@ -655,6 +655,8 @@ function addNodes(h: Hierarchy, graph: SlimGraph) {
       embedding.parentNode = node;
     });
   });
+
+  // NOTE(chizeng): clip_by_value_2 is defined here.
 };
 
 /**
