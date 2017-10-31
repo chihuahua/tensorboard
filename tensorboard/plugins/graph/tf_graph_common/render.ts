@@ -705,6 +705,9 @@ export class RenderGraphInfo {
       if (originalMetaEdge.w === opNodeToReplace.name) {
         originalMetaEdge.w = opNodeToReplace.name;
       }
+      if (originalMetaEdge.v === opNodeToReplace.name) {
+        originalMetaEdge.v = opNodeToReplace.name;
+      }
 
       // Also change any base edges that point into the original node to
       // point to the input arg within the function. These are used to
@@ -767,6 +770,8 @@ export class RenderGraphInfo {
     if (nodeName in this.hasSubhierarchy) {
       return;
     }
+
+    console.log('buildSubhierarchy', nodeName);
 
     // Record that we constructed the rendering hierarchy for this node, so we
     // don't construct it another time.
