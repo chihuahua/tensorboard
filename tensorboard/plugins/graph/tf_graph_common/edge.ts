@@ -376,7 +376,7 @@ function getEdgePathInterpolator(d: EdgeData, i: number, a: string) {
         points, d3.select('#' + d.label.endMarkerId), false);
   }
 
-  if (!adjoiningMetaedge || !adjoiningMetaedge.edgeGroup) {
+  if (!adjoiningMetaedge) {
     return d3.interpolate(a, interpolate(points));
   }
 
