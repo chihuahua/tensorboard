@@ -587,7 +587,6 @@ export class RenderGraphInfo {
     _.each(libraryMetanode.metagraph.nodes(), nodeName => {
       const node = libraryMetanode.metagraph.node(nodeName);
 
-      console.log('seen node', nodeName);
       switch (node.type) {
         case NodeType.META:
           // Recursively duplicate the metanode.
@@ -688,12 +687,6 @@ export class RenderGraphInfo {
       opNodeToReplace: OpNode, newOpNode: OpNode) {
     let inputIndex = newOpNode.functionInputIndex;
     let newInput = _.clone(opNodeToReplace.inputs[inputIndex]);
-    while (newInput.isControlDependency) {
-      // Ignore control dependencies - they are not assigned to
-      // input_args.
-      inputIndex++;
-      newInput = opNodeToReplace.inputs[inputIndex];
-    }
     // Clone the normalized input object.
     newOpNode.inputs.push(newInput);
 
@@ -703,10 +696,10 @@ export class RenderGraphInfo {
       // Update values in the corresponding edge in the high-level
       // metagraph.
       if (originalMetaEdge.w === opNodeToReplace.name) {
-        originalMetaEdge.w = opNodeToReplace.name;
+        originalMetaEdge.w = newOpNode.name;
       }
       if (originalMetaEdge.v === opNodeToReplace.name) {
-        originalMetaEdge.v = opNodeToReplace.name;
+        originalMetaEdge.v = newOpNode.name;
       }
 
       // Also change any base edges that point into the original node to
@@ -770,8 +763,6 @@ export class RenderGraphInfo {
     if (nodeName in this.hasSubhierarchy) {
       return;
     }
-
-    console.log('buildSubhierarchy', nodeName);
 
     // Record that we constructed the rendering hierarchy for this node, so we
     // don't construct it another time.

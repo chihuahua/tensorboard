@@ -655,8 +655,6 @@ function addNodes(h: Hierarchy, graph: SlimGraph) {
       embedding.parentNode = node;
     });
   });
-
-  // NOTE(chizeng): clip_by_value_2 is defined here.
 };
 
 /**

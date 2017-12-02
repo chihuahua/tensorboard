@@ -97,8 +97,6 @@ export function buildGroup(sceneGroup,
   // (Note that all children of g.edges are g.edge)
   let edgeGroups = (container as any).selectAll(function() {return this.childNodes;}).data(edges, getEdgeKey);
 
-  console.log('edgeGroups captured', edgeGroups, container);
-
   // Make edges a group to support rendering multiple lines for metaedge
   edgeGroups.enter()
       .append('g')
@@ -107,7 +105,6 @@ export function buildGroup(sceneGroup,
       .each(function(d: EdgeData) {
         let edgeGroup = d3.select(this);
         d.label.edgeGroup = edgeGroup;
-        console.log('edgeGroup set', d, edgeGroup, new Error().stack);
         // index node group for quick highlighting
         sceneElement._edgeGroupIndex[getEdgeKey(d)] = edgeGroup;
 
@@ -379,7 +376,7 @@ function getEdgePathInterpolator(d: EdgeData, i: number, a: string) {
         points, d3.select('#' + d.label.endMarkerId), false);
   }
 
-  if (!adjoiningMetaedge) {
+  if (!adjoiningMetaedge || !adjoiningMetaedge.edgeGroup) {
     return d3.interpolate(a, interpolate(points));
   }
 

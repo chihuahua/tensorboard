@@ -963,11 +963,14 @@ function normalizeInputs(inputs: string[]): NormalizedInput[] {
       }
     }
 
-    normalizedInputs.push({
-      name: name,
-      outputTensorKey: outputTensorKey,
-      isControlDependency: isControlDependency,
-    });
+    if (normalizedInputs.length === 0 ||
+      name !== normalizedInputs[normalizedInputs.length - 1].name) {
+      normalizedInputs.push({
+        name: name,
+        outputTensorKey: outputTensorKey,
+        isControlDependency: isControlDependency,
+      });
+    }
   });
   return normalizedInputs;
 }
