@@ -339,3 +339,5 @@ def extract_numerics_alert(event):
     return NumericsAlert(
         device_name, tensor_name, event.wall_time, nan_count, neg_inf_count,
         pos_inf_count)
+
+  return None

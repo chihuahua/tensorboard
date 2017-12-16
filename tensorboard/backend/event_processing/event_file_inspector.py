@@ -354,6 +354,9 @@ def get_inspection_units(logdir='', event_file='', tag=''):
 
   Returns:
     A list of InspectionUnit objects.
+
+  Raises:
+    ValueError: If neither a logdir nor an event_file is provided.
   """
   if logdir:
     subdirs = event_multiplexer.GetLogdirSubdirectories(logdir)
@@ -385,6 +388,8 @@ def get_inspection_units(logdir='', event_file='', tag=''):
         name=event_file,
         generator=generator,
         field_to_obs=get_field_to_observations_map(generator, tag))]
+
+  raise ValueError('Neither logdir or event_file is provided.')
 
 
 def inspect(logdir='', event_file='', tag=''):

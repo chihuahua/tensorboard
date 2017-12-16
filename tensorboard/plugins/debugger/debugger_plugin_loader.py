@@ -71,6 +71,8 @@ def get_debugger_plugin():
   if FLAGS.debugger_data_server_grpc_port > 0 or FLAGS.debugger_port > 0:
     return _ConstructDebuggerPluginWithGrpcPort
 
+  return None
+
 
 def _ConstructDebuggerPluginWithGrpcPort(context):
   try:
