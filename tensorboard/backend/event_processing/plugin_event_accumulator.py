@@ -25,7 +25,7 @@ import six
 import tensorflow as tf
 
 from tensorboard import data_compat
-from tensorboard.backend.event_processing import directory_watcher
+from tensorboard.backend.event_processing import last_modified_directory_watcher
 from tensorboard.backend.event_processing import event_file_loader
 from tensorboard.backend.event_processing import plugin_asset_util
 from tensorboard.backend.event_processing import reservoir
@@ -580,7 +580,7 @@ def _GeneratorFromPath(path):
   if IsTensorFlowEventsFile(path):
     return event_file_loader.EventFileLoader(path)
   else:
-    return directory_watcher.DirectoryWatcher(
+    return last_modified_directory_watcher.LastModifiedDirectoryWatcher(
         path, event_file_loader.EventFileLoader, IsTensorFlowEventsFile)
 
 

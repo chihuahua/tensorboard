@@ -24,7 +24,7 @@ import threading
 import six
 import tensorflow as tf
 
-from tensorboard.backend.event_processing import directory_watcher
+from tensorboard.backend.event_processing import single_file_directory_watcher
 from tensorboard.backend.event_processing import plugin_event_accumulator as event_accumulator  # pylint: disable=line-too-long
 from tensorboard.backend.event_processing import io_wrapper
 
@@ -195,7 +195,7 @@ class EventMultiplexer(object):
         accumulator.Reload()
       except (OSError, IOError) as e:
         tf.logging.error("Unable to reload accumulator '%s': %s", name, e)
-      except directory_watcher.DirectoryDeletedError:
+      except single_file_directory_watcher.DirectoryDeletedError:
         names_to_delete.add(name)
 
     with self._accumulators_mutex:

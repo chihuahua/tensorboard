@@ -20,18 +20,36 @@ py_library(
     name = "directory_watcher",
     srcs = ["directory_watcher.py"],
     srcs_version = "PY2AND3",
+)
+
+py_library(
+    name = "single_file_directory_watcher",
+    srcs = ["single_file_directory_watcher.py"],
+    srcs_version = "PY2AND3",
     deps = [
         ":io_wrapper",
+        ":directory_watcher",
         "//tensorboard:expect_tensorflow_installed",
     ],
 )
 
 py_test(
-    name = "directory_watcher_test",
+    name = "single_file_directory_watcher_test",
     size = "small",
-    srcs = ["directory_watcher_test.py"],
+    srcs = ["single_file_directory_watcher_test.py"],
     srcs_version = "PY2AND3",
     deps = [
+        ":single_file_directory_watcher",
+        "//tensorboard:expect_tensorflow_installed",
+    ],
+)
+
+py_library(
+    name = "last_modified_directory_watcher",
+    srcs = ["last_modified_directory_watcher.py"],
+    srcs_version = "PY2AND3",
+    deps = [
+        ":io_wrapper",
         ":directory_watcher",
         "//tensorboard:expect_tensorflow_installed",
     ],
@@ -81,7 +99,7 @@ py_library(
     srcs_version = "PY2AND3",
     visibility = ["//visibility:public"],
     deps = [
-        ":directory_watcher",
+        ":last_modified_directory_watcher",
         ":event_file_loader",
         ":plugin_asset_util",
         ":reservoir",
@@ -130,7 +148,7 @@ py_library(
     srcs_version = "PY2AND3",
     visibility = ["//visibility:public"],
     deps = [
-        ":directory_watcher",
+        ":single_file_directory_watcher",
         ":event_accumulator",
         ":io_wrapper",
         "//tensorboard:expect_tensorflow_installed",
